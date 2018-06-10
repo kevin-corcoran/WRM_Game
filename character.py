@@ -73,10 +73,24 @@ class Character(physicalobject.PhysicalObject):
         # self.engine_sprite.delete()
         super(Character, self).delete()
 
+    # def collides_with(self, other_object):
+    #     """Determine if this object collides with another"""
+    #
+    #     # Calculate distance between object centers that would be a collision,
+    #     # assuming square resources
+    #     collision_distance = self.image.width * 0.5 * self.scale \
+    #                          + other_object.image.width * 0.5 * other_object.scale
+    #
+    #     # Get distance using position tuples
+    #     actual_distance = util.distance(self.position, other_object.position)
+    #
+    #     return (actual_distance <= collision_distance)
+
     def handle_collision_with(self, obj):
-        self.x += -self.dx/20
-        self.y += -self.dy/20
-        # if not (self.key_handler[key.UP] or self.key_handler[key.DOWN]):
-        self.dy=0
-        # if not (self.key_handler[key.LEFT] or self.key_handler[key.RIGHT]):
-        self.dx=0
+        pass
+        # self.x += -self.dx/20
+        # self.y += -self.dy/20
+        # # if not (self.key_handler[key.UP] or self.key_handler[key.DOWN]):
+        # self.dy=0
+        # # if not (self.key_handler[key.LEFT] or self.key_handler[key.RIGHT]):
+        # self.dx=0

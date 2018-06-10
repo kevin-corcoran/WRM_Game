@@ -22,8 +22,3 @@ class Window(pyglet.window.Window):
         # if you want each scene to handle input, you could use pyglet's push_handlers(), or even something like:
         #     self.states[self.current_state].on_key_press(symbol, modifiers)
         # giving them access to the window instance might be needed.
-
-if __name__ == '__main__':
-    window = Window()
-    # pyglet.clock.schedule_interval(window.char.update, 1 / 120.0)
-    pyglet.app.run()

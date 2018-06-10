@@ -34,8 +34,29 @@ landfill_bin = pyglet.resource.image("landfill_bin.png")
 resize(landfill_bin,1/2)
 center_image(landfill_bin)
 
-#### todo: new file for trash
+""" paper/cardboard """
+cardboard_box = pyglet.resource.image("paper/cardboard_box.png")
+resize(cardboard_box,1/9)
+center_image(cardboard_box)
 
-bottle = pyglet.resource.image("bcp/trash_bottle.png")
-resize(bottle, 1/8)
-center_image(bottle)
+""" bcp """
+plastic_bottle = pyglet.resource.image("bcp/plastic_bottle.png")
+resize(plastic_bottle, 1/9)
+center_image(plastic_bottle)
+
+""" compost """
+pizza_box = pyglet.resource.image("compost/pizza_box.png")
+resize(pizza_box,1/9)
+center_image(pizza_box)
+
+""" landfill """
+plastic_bag = pyglet.resource.image("landfill/plastic_bag.png")
+resize(plastic_bag, 1/5)
+center_image(plastic_bag)
+
+trash = {
+    'paper' : [cardboard_box],
+    'bcp' : [plastic_bottle],
+    'compost' : [pizza_box],
+    'landfill' : [plastic_bag]
+}
