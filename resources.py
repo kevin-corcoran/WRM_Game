@@ -13,6 +13,12 @@ def resize(image, factor):
 pyglet.resource.path = ['assets/']
 pyglet.resource.reindex()
 
+button = pyglet.resource.image("img.png")
+center_image(button)
+
+button_down = pyglet.resource.image("button_down.png")
+center_image(button_down)
+
 # Load the main resources and get them to draw centered
 bins = pyglet.resource.image("bins.png")
 resize(bins,1/2)

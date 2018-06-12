@@ -12,13 +12,14 @@ class Bin(physicalobject.PhysicalObject):
         # self.engine_sprite = pyglet.sprite.Sprite(img=resources.engine_image, *args, **kwargs)
         # self.engine_sprite.visible = False
         self.dx = 0.0
-
+        self.bin_type = 'paper_bin'
         # Tell the game handler about any event handlers
         self.key_handler = key.KeyStateHandler()
         self.event_handlers = [self, self.key_handler]
 
         self.states = [resources.paper_bin, resources.bcp_bin, resources.compost_bin, resources.landfill_bin]
         self.current_state = 0  # later you change it to get the bin you want
+        self.bins = {0: 'paper', 1: 'bcp', 2: 'compost', 3: 'landfill'}
         self.count = 0 # used in on_key_press to solve bug
 
     def update(self, dt):
@@ -37,11 +38,14 @@ class Bin(physicalobject.PhysicalObject):
                 new_state = new_state % len(self.states)
                 self.current_state = new_state
                 self.image = self.states[self.current_state]
+                self.bin_type = self.bins[self.current_state]
+                print('bin_type: ', self.bin_type)
             if symbol == key.A:
                 new_state = self.current_state - 1
                 new_state = new_state % len(self.states)
                 self.current_state = new_state
                 self.image = self.states[self.current_state]
+                self.bin_type = self.bins[self.current_state]
 
         if symbol == key.RIGHT:
             self.dx = 100.0
