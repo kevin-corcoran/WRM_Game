@@ -55,12 +55,15 @@ def game_over():
 
 def reset_level():
     # pass
-    global score, count, lives, lives_sprites
+    global score, count, lives, lives_sprites, game_objects
     score = 0
     score_label.text = "Score: " + str(score)
     count = 0
     lives = 4
-    game_objects = [bins] + trash_objects
+    for obj in game_objects:
+        if isinstance(obj, trash.Trash):
+            obj.delete()
+    game_objects = [bins] + [trash.Trash(x=window.width//2, y=window.height, batch=main_batch)]
     game_over_label.y = -300
     restart_button.y = -300
     lives_sprites = [pyglet.sprite.Sprite(img=life, \
@@ -92,7 +95,17 @@ def update(dt):
             obj.update(dt)
             # if isinstance(obj, trash.Trash):
             #     y_pos.append(obj.y)
-
+            if obj.y < 10:
+                obj.dead = True
+                score -= 1
+                # obj.collides_with = lambda x: False
+                # obj.check_bounds = lambda : None
+                if obj.collides_with(obj) != False: # else we already lost a life
+                    lives -= 1
+                    if lives_sprites != []:
+                        lives_sprites[-1].delete()
+                        lives_sprites = lives_sprites[:-1]
+                        
         # lowest_trash = min(game_objects, key=lambda obj: obj.y if isinstance(obj, trash.Trash))
         lowest_trash = min(game_objects, key=check_lowest)
         for handler in lowest_trash.event_handlers:
@@ -108,16 +121,16 @@ def update(dt):
             """ Why wont score update?
                 Trying to reduce score if trash touches grounds
              """
-            if obj.y < 10:
-                obj.dead = True
-                score -= 1
-                # obj.collides_with = lambda x: False
-                # obj.check_bounds = lambda : None
-                if obj.collides_with(obj) != False: # else we already lost a life
-                    lives -= 1
-                    if lives_sprites != []:
-                        lives_sprites[-1].delete()
-                        lives_sprites = lives_sprites[:-1]
+            # if obj.y < 10:
+            #     obj.dead = True
+            #     score -= 1
+            #     # obj.collides_with = lambda x: False
+            #     # obj.check_bounds = lambda : None
+            #     if obj.collides_with(obj) != False: # else we already lost a life
+            #         lives -= 1
+            #         if lives_sprites != []:
+            #             lives_sprites[-1].delete()
+            #             lives_sprites = lives_sprites[:-1]
 
 
 
@@ -157,13 +170,13 @@ def update(dt):
                 score_label.text = "Score: " + str(score)
 
         # adjust speed trash falls after so much trash is created
-        if count == 9:
+        if count == 5:
             pyglet.clock.unschedule(add_trash)
-            pyglet.clock.schedule_interval(add_trash,9)
+            pyglet.clock.schedule_interval(add_trash,6)
             count += 1
         elif count == 10:
             pyglet.clock.unschedule(add_trash)
-            pyglet.clock.schedule_interval(add_trash, 8)
+            pyglet.clock.schedule_interval(add_trash, 5)
             count += 1
         elif count == 15:
             pyglet.clock.unschedule(add_trash)
@@ -220,5 +233,5 @@ def on_mouse_press(x, y, button, modifiers):
         reset_level()
 
 pyglet.clock.schedule_interval(update, 1/60.0)
-pyglet.clock.schedule_interval(add_trash,10)
+pyglet.clock.schedule_interval(add_trash,7)
 pyglet.app.run()

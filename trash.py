@@ -35,8 +35,8 @@ class Trash(physicalobject.PhysicalObject):
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.SPACE:
-            self.dy = 300
-            print(self.dy)
+            self.dy = 350
+            # print(self.dy)
         # print('name', self.name)
         # self.name = str(self.image)
         # self.image = random_bin_trash
