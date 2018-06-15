@@ -25,6 +25,8 @@ class PhysicalObject(pyglet.sprite.Sprite):
         # Only applies to things with keyboard/mouse input
         self.event_handlers = []
 
+        self.wrapped = 0
+
     def update(self, dt):
         """This method should be called every frame."""
 
@@ -33,22 +35,26 @@ class PhysicalObject(pyglet.sprite.Sprite):
         self.y += self.velocity_y * dt
 
         # Wrap around the screen if necessary
-        self.check_bounds()
+        # self.check_bounds()
 
     def check_bounds(self):
         """Use the classic Asteroids screen wrapping behavior"""
         min_x = -self.image.width / 2
         min_y = -self.image.height / 2
-        max_x = 800 + self.image.width / 2
-        max_y = 600 + self.image.height / 2
+        max_x = 1024 + self.image.width / 2
+        max_y = 668 + self.image.height / 2
         if self.x < min_x:
             self.x = max_x
+            self.wrapped = 1
         if self.y < min_y:
             self.y = max_y
+            self.wrapped = 1
         if self.x > max_x:
             self.x = min_x
+            self.wrapped = 1
         if self.y > max_y:
             self.y = min_y
+            self.wrapped = 1
 
     def collides_with(self, other_object):
         """Determine if this object collides with another"""

@@ -22,3 +22,6 @@ def create_image(text, name='img',W=12,H=12,background_color=(73, 109, 137, 200)
     return path
 
 create_image(text='Start',W=80,H=30)
+create_image(text='Help',name='help',W=80,H=30)
+create_image(text='Main Menu',name='main',W=80,H=30)
+create_image(text='Restart',name='res',W=80,H=30)

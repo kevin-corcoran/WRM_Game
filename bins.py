@@ -1,4 +1,4 @@
-import pyglet
+# import pyglet
 from pyglet.window import key
 import physicalobject
 import resources
@@ -12,7 +12,7 @@ class Bin(physicalobject.PhysicalObject):
         # self.engine_sprite = pyglet.sprite.Sprite(img=resources.engine_image, *args, **kwargs)
         # self.engine_sprite.visible = False
         self.dx = 0.0
-        self.bin_type = 'paper_bin'
+        self.bin_type = 'paper'
         # Tell the game handler about any event handlers
         self.key_handler = key.KeyStateHandler()
         self.event_handlers = [self, self.key_handler]
@@ -48,11 +48,11 @@ class Bin(physicalobject.PhysicalObject):
                 self.bin_type = self.bins[self.current_state]
 
         if symbol == key.RIGHT:
-            self.dx = 100.0
+            self.dx = 200.0
             if self.count == 1:
                 self.count = 0
         if symbol == key.LEFT:
-            self.dx = -100.0
+            self.dx = -200.0
             if self.count == 1:
                 self.count = 0
 
