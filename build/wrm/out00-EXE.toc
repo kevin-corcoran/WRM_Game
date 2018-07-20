@@ -1,5 +1,5 @@
 ('/Users/Socrates/projects/wrm/build/wrm/wrm',
- True,
+ False,
  False,
  True,
  None,
@@ -46,7 +46,7 @@
  [],
  False,
  False,
- 1528950555,
- [('run',
-   '/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/PyInstaller/bootloader/Darwin-64bit/run',
+ 1529106742,
+ [('runw',
+   '/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/PyInstaller/bootloader/Darwin-64bit/runw',
    'EXECUTABLE')])

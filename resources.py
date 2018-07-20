@@ -26,6 +26,9 @@ center_image(main_menu_button)
 restart_button = pyglet.resource.image("res.png")
 center_image(restart_button)
 
+# a_and_d = pyglet.resource.image('a_and_d.png')
+# center_image(a_and_d)
+
 # Load the main resources and get them to draw centered
 bins = pyglet.resource.image("bins.png")
 resize(bins,1/2)

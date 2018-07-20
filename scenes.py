@@ -30,7 +30,8 @@ class MainMenuScene(SceneTemplate):
         self.label = pyglet.text.Label(
             text=self.text,
             font_name='Arial', font_size=32,
-            color=(200, 255, 255, 255), x=self.width/2, y=self.height-60,
+            # color=(200, 255, 255, 255),
+            x=self.width/2, y=self.height-60,
             batch=self.batch,
             anchor_x='center')
         # (...)
@@ -75,24 +76,32 @@ class GameScene(SceneTemplate):
 
         self.bins = [self.paper_bin, self.bcp_bin, self.compost_bin, self.landfill_bin]
         self.current_bin = 0
+        # self.count = 0 # used in on_key_press to solve bug
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.P:
             print('pause game')
+
         if symbol == key.D:
+            print(symbol)
             new_bin = self.current_bin + 1
             new_bin = new_bin % len(self.bins)
             self.bins[self.current_bin].scale = 1/3
             self.bins[new_bin].scale = 1/2
             self.current_bin = new_bin
         if symbol == key.A:
+            print(symbol)
             new_bin = self.current_bin - 1
             new_bin = new_bin % len(self.bins)
             self.bins[self.current_bin].scale = 1/3
             self.bins[new_bin].scale = 1/2
             self.current_bin = new_bin
-            # self.bcp_bin.scale = 1/2
-            # pass
+                    # self.bcp_bin.scale = 1/2
+                    # pass
+    # def on_key_release(self,symbol,modifiers):
+    #     if symbol == key.A or symbol == key.D:
+    #         self.count = 0
+    #     print('release!')
 
 class HelpScene(SceneTemplate):
     def __init__(self,text='Help Scene'):
@@ -106,20 +115,23 @@ class HelpScene(SceneTemplate):
             x=self.width/2, y=self.height-60,
             batch=self.batch,
             anchor_x='center')
-        self.controls_label = pyglet.text.Label(
-            text = 'BCP Guidelines',
+        self.control_label = pyglet.text.Label(
+            text = 'Switch Bins: A and D; Move: Left and Right arrow; Pause: P',
             font_size = 20,
-            x = self.label.x - self.width/3,
+            x = self.width/2, #self.label.x - self.width/3,
             y = self.label.y - 70,
             batch=self.batch,
             anchor_x='center'
         )
-        self.bcp_guide = pyglet.text.HTMLLabel(
-            '<font face="Times New Roman" size="4">Hello, <i>world</i></font>',
-            x = 500,
-            y = 200,
-            batch = self.batch
+        self.control_label = pyglet.text.Label(
+            text = 'Increase speed of nearest trash object: Space',
+            font_size = 20,
+            x = self.width/2, #self.label.x - self.width/3,
+            y = self.label.y - 95,
+            batch=self.batch,
+            anchor_x='center'
         )
+        # self.switch_bin_keys = pyglet.sprite.Sprite(img=resources.a_and_d,x=self.switch_label.x,y=self.switch_label.y-100,batch = self.batch)
         # self.document = pyglet.text.decode_html('Hello, <b>world</b>',x=500,y=100)
 
         # (...)

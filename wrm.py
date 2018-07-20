@@ -20,8 +20,8 @@ level_label = pyglet.text.Label(text="WRM: It's a Game!",
                                 x=window.width - 100, y=window.height - 20, anchor_x='center', batch=main_batch)
 trash_objects = [trash_obj]
 trash_label = pyglet.text.Label(text=trash_obj.name,
-                    x=100, y=window.height - 20,
-                    batch=main_batch, font_size=8)
+                    x=window.width/2, y=window.height - 20,
+                    batch=main_batch, font_size=8, anchor_x='center')
 # Set up the game over label offscreen
 game_over_label = pyglet.text.Label(text="GAME OVER",
                                     x=window.width/2, y=-300, anchor_x='center',
@@ -71,6 +71,8 @@ def reset_level():
                             y=window.height - life.height - 30, batch=main_batch) \
                             for i in range(lives)]
     # remove event to listen to restart button
+    pyglet.clock.unschedule(add_trash)
+    pyglet.clock.schedule_interval(add_trash,7)
     window.pop_handlers()
 
 def reset_button(x, y, button, modifiers):
@@ -105,9 +107,11 @@ def update(dt):
                     if lives_sprites != []:
                         lives_sprites[-1].delete()
                         lives_sprites = lives_sprites[:-1]
-                        
+
         # lowest_trash = min(game_objects, key=lambda obj: obj.y if isinstance(obj, trash.Trash))
         lowest_trash = min(game_objects, key=check_lowest)
+        # if len(game_objects) > 1:
+            # lowest_trash = game_objects[1]
         for handler in lowest_trash.event_handlers:
             window.push_handlers(handler)
             event_stack_size += 1
@@ -192,8 +196,25 @@ def update(dt):
             count += 1
         elif count == 50:
             pyglet.clock.unschedule(add_trash)
-            pyglet.clock.schedule_interval(add_trash, 1)
+            pyglet.clock.schedule_interval(add_trash, 1.8)
             count += 1
+        elif count == 100:
+            pyglet.clock.unschedule(add_trash)
+            pyglet.clock.schedule_interval(add_trash,1.7)
+            count += 1
+        elif count == 150:
+            pyglet.clock.unschedule(add_trash)
+            pyglet.clock.schedule_interval(add_trash,1.6)
+            count += 1
+        elif count == 200:
+            pyglet.clock.unschedule(add_trash)
+            pyglet.clock.schedule_interval(add_trash,1.5)
+            count += 1
+        elif count == 500:
+            pyglet.clock.unschedule(add_trash)
+            pyglet.clock.schedule_interval(add_trash,1.3)
+            count += 1
+
 
 def add_trash(dt):
     global game_objects
@@ -204,10 +225,12 @@ def add_trash(dt):
     if window.current_state == 2: # Game Scene
         new_trash = trash.Trash(x=x_pos, y=window.height, batch=main_batch)
         # increase speed trash falls based on score
+        if score > 100:
+            new_trash.dy = randint(50,80)
         if score > 30:
-            new_trash.dy = randint(40,80)
-        elif score > 20:
             new_trash.dy = randint(40,70)
+        elif score > 20:
+            new_trash.dy = randint(40,65)
         elif score > 15:
             new_trash.dy = randint(30,60)
         elif score > 10:
