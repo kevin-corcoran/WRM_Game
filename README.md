@@ -1,7 +1,5 @@
 # WRM Game
 
-This is a trash sorting game made for the [BSC](https://www.bsc.coop/).
-
 # Setting up:
 
 The first thing you'll need is python. I used python 3 and a library called
